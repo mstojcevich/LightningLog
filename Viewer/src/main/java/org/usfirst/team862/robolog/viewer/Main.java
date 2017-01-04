@@ -12,7 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("logviewer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("logviewer.fxml"));
         primaryStage.setTitle("RoboLog Viewer");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();

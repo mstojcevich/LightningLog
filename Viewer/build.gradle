@@ -1,0 +1,17 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+dependencies {
+    compile project(":Common")
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/java"]
+            includes = ["**/*.fxml"]
+        }
+    }
+}
+
+mainClassName = "org.usfirst.team862.robolog.viewer.Main"
