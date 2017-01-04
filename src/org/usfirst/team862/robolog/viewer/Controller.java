@@ -90,8 +90,6 @@ public class Controller {
                 ) {
             LogHeader header = (LogHeader) ois.readObject();
 
-            System.out.println("Hiyo");
-
             this.events = new LinkedList<>();
             try {
                 while(true) {
