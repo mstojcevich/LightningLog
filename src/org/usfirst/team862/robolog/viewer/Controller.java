@@ -68,7 +68,7 @@ public class Controller {
 
         customPropKeyCol.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getKey()));
 
-        writeTestLog(new File("/home/marcusant/newFormat.llog.gz"), 1000);
+        writeTestLog(new File("testLog.llog.gz"), 1000);
     }
 
     @FXML

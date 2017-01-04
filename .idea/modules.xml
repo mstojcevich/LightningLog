@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LightningLogVisualizer.iml" filepath="$PROJECT_DIR$/LightningLogVisualizer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoboLog.iml" filepath="$PROJECT_DIR$/RoboLog.iml" />
     </modules>
   </component>
 </project>
