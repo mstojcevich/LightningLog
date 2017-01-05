@@ -44,3 +44,7 @@ fabric.properties
 
 # RoboLog
 testLog.llog.gz
+
+# Gradle
+.gradle
+build/
