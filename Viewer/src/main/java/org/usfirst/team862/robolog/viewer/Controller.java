@@ -241,6 +241,7 @@ public class Controller {
                         names[rng.nextInt(names.length)],
                         descriptions[rng.nextInt(descriptions.length)],
                         new Date(System.currentTimeMillis() + i*1000),
+                        0, 0, false,
                         new RioData(rng.nextDouble(), rng.nextDouble(), rng.nextDouble(), rng.nextDouble(),
                                 rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(),
                                 rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean()),
