@@ -88,15 +88,12 @@ public class Controller {
             event.consume();
         });
 
-        mainPane.setOnDragOver(new EventHandler<DragEvent>() {
-           @Override
-            public void handle(DragEvent event) {
-               if(event.getDragboard().hasFiles()) {
-                   event.acceptTransferModes(TransferMode.COPY);
-               }
+        mainPane.setOnDragOver(event -> {
+            if(event.getDragboard().hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
 
-               event.consume();
-           }
+            event.consume();
         });
     }
 
