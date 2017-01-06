@@ -1,6 +1,41 @@
 apply plugin: 'application'
 apply plugin: 'java'
 
+def moduleName = "robolog-viewer"
+
+jar.baseName = 'RoboLog-Viewer'
+
+mainClassName = "org.usfirst.team862.robolog.viewer.Main"
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
+    }
+}
+
+apply plugin: 'eu.appsatori.fatjar'
+
+jar {
+    manifest {
+        attributes("Implementation-Title": moduleName,
+                "Implementation-Version": version,
+                "Main-Class": mainClassName,
+                "Class-Path": "RoboLog-Common-" + version + ".jar")
+    }
+}
+
+fatJar {
+    manifest {
+        attributes("Implementation-Title": moduleName,
+                "Implementation-Version": version,
+                "Main-Class": mainClassName)
+    }
+}
+
 dependencies {
     compile project(":Common")
 }
@@ -13,5 +48,3 @@ sourceSets {
         }
     }
 }
-
-mainClassName = "org.usfirst.team862.robolog.viewer.Main"

@@ -1,1 +1,3 @@
 apply plugin: 'java'
+
+def moduleName = "robolog-common"

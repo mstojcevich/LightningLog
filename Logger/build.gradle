@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+def moduleName = "robolog-logger"
+
 repositories {
     maven {
         url 'http://first.wpi.edu/FRC/roborio/maven/release/'

@@ -1,0 +1,7 @@
+group = "org.usfirst.team862"
+version = "SNAPSHOT"
+
+allprojects {
+    group = "org.usfirst.team862"
+    version = "SNAPSHOT"
+}

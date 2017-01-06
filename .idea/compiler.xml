@@ -6,6 +6,8 @@
       <module name="Common_test" target="1.8" />
       <module name="Logger_main" target="1.8" />
       <module name="Logger_test" target="1.8" />
+      <module name="RoboLog_main" target="1.8" />
+      <module name="RoboLog_test" target="1.8" />
       <module name="Viewer_main" target="1.8" />
       <module name="Viewer_test" target="1.8" />
     </bytecodeTargetLevel>
