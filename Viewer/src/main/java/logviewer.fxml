@@ -42,13 +42,11 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Robot Code Startup Time:" />
-                        <Label layoutX="14.0" layoutY="53.0" text="Log Save Time:" />
-                        <Label layoutX="14.0" layoutY="90.0" text="Code Deploy Time:" />
-                        <Label layoutX="14.0" layoutY="123.0" text="Rio Boot Time:" />
+                        <Label layoutX="14.0" layoutY="47.0" text="Code Deploy Time:" />
+                        <Label layoutX="14.0" layoutY="80.0" text="Rio Boot Time:" />
                         <TextField fx:id="codeStartupTimeField" editable="false" layoutX="183.0" layoutY="9.0" prefHeight="29.0" prefWidth="169.0" promptText="Log not yet loaded" />
-                        <TextField fx:id="logSaveTimeField" editable="false" layoutX="129.0" layoutY="48.0" prefHeight="29.0" prefWidth="169.0" promptText="Log not yet loaded" />
-                        <TextField fx:id="codeDeployTimeField" editable="false" layoutX="145.0" layoutY="85.0" prefHeight="29.0" prefWidth="169.0" promptText="Log not yet loaded" />
-                        <TextField fx:id="rioBootTimeField" editable="false" layoutX="114.0" layoutY="118.0" prefHeight="29.0" prefWidth="169.0" promptText="Log not yet loaded" />
+                        <TextField fx:id="codeDeployTimeField" editable="false" layoutX="145.0" layoutY="42.0" prefHeight="29.0" prefWidth="169.0" promptText="Log not yet loaded" />
+                        <TextField fx:id="rioBootTimeField" editable="false" layoutX="114.0" layoutY="75.0" prefHeight="29.0" prefWidth="169.0" promptText="Log not yet loaded" />
                      </children>
                   </AnchorPane>
             </content>
@@ -58,13 +56,15 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Label layoutX="14.0" layoutY="5.0" text="Type:" />
-                        <Label layoutX="14.0" layoutY="67.0" text="Stack:" />
-                        <TextArea fx:id="stackTextArea" editable="false" layoutX="54.0" layoutY="86.0" prefHeight="108.0" prefWidth="558.0" promptText="No event selected" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="56.799999999999955" />
+                        <Label layoutX="13.0" layoutY="88.0" text="Stack:" />
+                        <TextArea fx:id="stackTextArea" editable="false" layoutX="63.0" layoutY="107.0" prefHeight="108.0" prefWidth="558.0" promptText="No event selected" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="67.0" />
                         <Label layoutX="14.0" layoutY="24.0" text="Title:" />
                         <Label fx:id="eventTitleLabel" layoutX="50.0" layoutY="24.0" text="No event selected" />
                         <Label fx:id="eventTypeLabel" layoutX="54.0" layoutY="5.0" text="No event selected" />
                         <Label fx:id="eventDescLabel" layoutX="94.0" layoutY="40.0" text="No event selected" />
                         <Label layoutX="14.0" layoutY="40.0" text="Description:" />
+                        <Label layoutX="13.0" layoutY="58.0" text="Match Time (seconds):" />
+                        <Label fx:id="matchTimeLabel" layoutX="141.0" layoutY="58.0" text="No event selected" />
                      </children>
                   </AnchorPane>
               </content>
@@ -95,6 +95,9 @@
                         <RadioButton fx:id="relay2Btn" disable="true" layoutX="98.0" layoutY="109.0" mnemonicParsing="false" selected="true" text="Relay 2" />
                         <RadioButton fx:id="relay1Btn" disable="true" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" selected="true" text="Relay 1" />
                         <RadioButton fx:id="relay3Btn" disable="true" layoutX="98.0" layoutY="128.0" mnemonicParsing="false" text="Relay 3" />
+                        <Label layoutX="185.0" layoutY="97.0" text="Battery Voltage" />
+                        <ProgressBar fx:id="batteryVoltageBar" layoutX="278.0" layoutY="97.0" prefHeight="20.0" prefWidth="105.0" />
+                        <RadioButton fx:id="brownoutBtn" disable="true" layoutX="183.0" layoutY="118.0" mnemonicParsing="false" text="Brownout" />
                      </children>
                   </AnchorPane>
             </content>

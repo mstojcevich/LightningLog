@@ -57,4 +57,15 @@ public class LoggerEvent implements Serializable {
         return stackTrace;
     }
 
+    public double getBatteryVoltage() {
+        return batteryVoltage;
+    }
+
+    public boolean getBrownout() {
+        return brownedOut;
+    }
+
+    public double getMatchTime() {
+        return matchTime;
+    }
 }

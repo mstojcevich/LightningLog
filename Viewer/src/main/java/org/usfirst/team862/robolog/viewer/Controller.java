@@ -18,7 +18,10 @@ import org.usfirst.team862.robolog.shared.RioData;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -40,16 +43,22 @@ public class Controller {
     private RadioButton relay1Btn, relay2Btn, relay3Btn;
 
     @FXML
+    private RadioButton brownoutBtn;
+
+    @FXML
+    private ProgressBar batteryVoltageBar;
+
+    @FXML
     private ProgressBar analog0Bar, analog1Bar, analog2Bar, analog3Bar;
 
     @FXML
     private TextArea stackTextArea;
 
     @FXML
-    private TextField codeStartupTimeField, logSaveTimeField, codeDeployTimeField, rioBootTimeField;
+    private TextField codeStartupTimeField, codeDeployTimeField, rioBootTimeField;
 
     @FXML
-    private Label eventTypeLabel, eventTitleLabel, eventDescLabel;
+    private Label eventTypeLabel, eventTitleLabel, eventDescLabel, matchTimeLabel;
 
     @FXML
     private CheckBox showErrors, showWarnings, showExceptions, showInfo, showOther;
@@ -144,10 +153,18 @@ public class Controller {
         updateRioData(event.getRioData());
         updateCustomTable(event.getCustomProperties());
 
+        batteryVoltageBar.setProgress(event.getBatteryVoltage()/13f);
+        batteryVoltageBar.setTooltip(new Tooltip(String.format("%.2f", event.getBatteryVoltage())));
+
+        brownoutBtn.setSelected(event.getBrownout());
+
         stackTextArea.setText(event.getStackTrace());
         eventTypeLabel.setText(event.getType().name());
         eventTitleLabel.setText(event.getTitle());
         eventDescLabel.setText(event.getDescription());
+        long matchTimeSeconds = (long) event.getMatchTime();
+        matchTimeLabel.setText(String.format("%d minutes, %d seconds", TimeUnit.SECONDS.toMinutes(matchTimeSeconds),
+                matchTimeSeconds % 60));
     }
 
     private boolean matchesFilters(LoggerEvent event) {
@@ -218,7 +235,7 @@ public class Controller {
         // Update analog bars
         for(int i = 0; i < analogBars.length; i++) {
             analogBars[i].setProgress(rd.getAnalog(i)/5f);
-            analogBars[i].setTooltip(new Tooltip(Double.toString(rd.getAnalog(i))));
+            analogBars[i].setTooltip(new Tooltip(String.format("%.2f", rd.getAnalog(i))));
         }
 
         // Update relay buttons
@@ -272,7 +289,7 @@ public class Controller {
                         descriptions[rng.nextInt(descriptions.length)],
                         new Date(System.currentTimeMillis() + i*1000),
                         0, 0, false,
-                        new RioData(rng.nextDouble(), rng.nextDouble(), rng.nextDouble(), rng.nextDouble(),
+                        new RioData(rng.nextDouble()*5, rng.nextDouble()*5, rng.nextDouble()*5, rng.nextDouble()*5,
                                 rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(),
                                 rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean()),
                         customProps,
