@@ -2,6 +2,8 @@ apply plugin: 'java'
 
 def moduleName = "robolog-logger"
 
+jar.baseName = 'RoboLog-Logger'
+
 repositories {
     maven {
         url 'http://first.wpi.edu/FRC/roborio/maven/release/'

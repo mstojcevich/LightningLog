@@ -1,3 +1,5 @@
 apply plugin: 'java'
 
 def moduleName = "robolog-common"
+
+jar.baseName = 'RoboLog-Common'
