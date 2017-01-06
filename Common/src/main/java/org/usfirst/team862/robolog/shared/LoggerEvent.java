@@ -12,8 +12,11 @@ public class LoggerEvent implements Serializable {
     private final Date time;
     private final Map<String, String> customProperties;
     private final String stackTrace;
+    private final double matchTime;
+    private final double batteryVoltage;
+    private final boolean brownedOut;
 
-    public LoggerEvent(LoggerEventType type, String title, String description, Date time, RioData rioData, Map<String, String> customProperties, String stackTrace) {
+    public LoggerEvent(LoggerEventType type, String title, String description, Date time, double matchTime, double batteryVoltage, boolean isBrownedOut, RioData rioData, Map<String, String> customProperties, String stackTrace) {
         this.type = type;
         this.title = title;
         this.description = description;
@@ -21,6 +24,9 @@ public class LoggerEvent implements Serializable {
         this.time = time;
         this.customProperties = customProperties;
         this.stackTrace = stackTrace;
+        this.matchTime = matchTime;
+        this.batteryVoltage = batteryVoltage;
+        this.brownedOut = isBrownedOut;
     }
 
     public LoggerEventType getType() {
