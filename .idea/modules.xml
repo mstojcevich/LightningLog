@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/Common.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/Common.iml" group="Common" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/Common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/Common_main.iml" group="Common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/Common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/Common_test.iml" group="Common" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Logger/Logger.iml" filepath="$PROJECT_DIR$/.idea/modules/Logger/Logger.iml" group="Logger" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Logger/Logger_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Logger/Logger_main.iml" group="Logger" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Logger/Logger_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Logger/Logger_test.iml" group="Logger" />
