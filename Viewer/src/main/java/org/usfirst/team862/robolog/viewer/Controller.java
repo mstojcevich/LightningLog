@@ -3,8 +3,13 @@ package org.usfirst.team862.robolog.viewer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import org.usfirst.team862.robolog.shared.LogHeader;
 import org.usfirst.team862.robolog.shared.LoggerEvent;
@@ -52,6 +57,9 @@ public class Controller {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private AnchorPane mainPane;
+
     private RadioButton[] digitalButtons;
     private RadioButton[] relayButtons;
     private ProgressBar[] analogBars;
@@ -69,6 +77,27 @@ public class Controller {
         customPropKeyCol.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getKey()));
 
         writeTestLog(new File("testLog.llog.gz"), 1000);
+
+        mainPane.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            if(db.hasFiles()) { // load in the first file
+                loadFile(db.getFiles().get(0));
+            }
+
+            event.setDropCompleted(true);
+            event.consume();
+        });
+
+        mainPane.setOnDragOver(new EventHandler<DragEvent>() {
+           @Override
+            public void handle(DragEvent event) {
+               if(event.getDragboard().hasFiles()) {
+                   event.acceptTransferModes(TransferMode.COPY);
+               }
+
+               event.consume();
+           }
+        });
     }
 
     @FXML
@@ -82,12 +111,16 @@ public class Controller {
 
         File chosen = chooser.showOpenDialog(Main.mainStage);
 
+        loadFile(chosen);
+    }
+
+    void loadFile(File f) {
         try (
-                FileInputStream fis = new FileInputStream(chosen);
+                FileInputStream fis = new FileInputStream(f);
                 BufferedInputStream bis = new BufferedInputStream(fis);
                 GZIPInputStream gis = new GZIPInputStream(bis);
                 ObjectInputStream ois = new ObjectInputStream(gis);
-                ) {
+        ) {
             LogHeader header = (LogHeader) ois.readObject();
 
             this.events = new LinkedList<>();
@@ -100,10 +133,10 @@ public class Controller {
             loadLogHeader(header);
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, String.format("Failed to load log file at %s. Looks corrupt or wrong format.", chosen.getPath())).show();
+            new Alert(Alert.AlertType.ERROR, String.format("Failed to load log file at %s. Looks corrupt or wrong format.", f.getPath())).show();
         } catch (Exception e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, String.format("Failed to load log file at %s", chosen.getPath())).show();
+            new Alert(Alert.AlertType.ERROR, String.format("Failed to load log file at %s", f.getPath())).show();
         }
     }
 
@@ -246,7 +279,7 @@ public class Controller {
                                 rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(),
                                 rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean(), rng.nextBoolean()),
                         customProps,
-                        "Stacktrace not yet implemented"
+                        ""
                 );
 
                 oos.writeObject(event);
