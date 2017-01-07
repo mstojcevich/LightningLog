@@ -17,18 +17,31 @@ import java.util.zip.GZIPOutputStream;
 
 public class RoboLogFile implements Closeable {
 
+    private final boolean compression;
+
     // Output streams
     private final FileOutputStream fos;
     private final BufferedOutputStream bos;
-    private final GZIPOutputStream gos;
+    private final OutputStream gos;
     private final ObjectOutputStream out;
 
-    private Map<String, String> emptyMap = new HashMap<>();
+    private static final Map<String, String> emptyMap = new HashMap<>();
 
-    public RoboLogFile(File path) throws IOException {
+    /**
+     * Create an instance of a log file to be able to write events to
+     *
+     * @param path The log file to write to, for example: <code>new File("/home/lvuser/log.llog")</code>
+     * @param compression Whether to enable compression. Enabling compression reduces log file size but will also
+     *                    make the log unreadable if the robot code does not cleanly shut down.
+     *                    If this is set to true, the file extension should be ".llog.gz", otherwise ".llog"
+     * @throws IOException Thrown if the file could not be opened
+     */
+    public RoboLogFile(File path, boolean compression) throws IOException {
+        this.compression = compression;
+
         fos = new FileOutputStream(path, false); // false for overwrite instead of append
         bos = new BufferedOutputStream(fos);
-        gos = new GZIPOutputStream(bos);
+        gos = compression ? new GZIPOutputStream(bos) : bos;
         out = new ObjectOutputStream(gos);
 
         // Create and write the header
@@ -88,7 +101,8 @@ public class RoboLogFile implements Closeable {
     @Override
     public void close() throws IOException {
         out.close();
-        gos.close();
+        if(compression)
+            gos.close();
         bos.close();
         fos.close();
     }
