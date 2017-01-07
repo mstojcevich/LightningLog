@@ -85,12 +85,10 @@ public class Controller {
 
         customPropKeyCol.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getKey()));
 
-        writeTestLog(new File("testLog.llog.gz"), 1000);
-
         mainPane.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             if(db.hasFiles()) { // load in the first file
-                loadFile(db.getFiles().get(0));
+                loadFile(db.getFiles().get(0), db.getFiles().get(0).getPath().endsWith(".gz"));
             }
 
             event.setDropCompleted(true);
@@ -117,15 +115,15 @@ public class Controller {
 
         File chosen = chooser.showOpenDialog(Main.mainStage);
 
-        loadFile(chosen);
+        loadFile(chosen, chosen.getPath().endsWith(".gz"));
     }
 
-    void loadFile(File f) {
+    void loadFile(File f, boolean compressed) {
         try (
                 FileInputStream fis = new FileInputStream(f);
                 BufferedInputStream bis = new BufferedInputStream(fis);
-                GZIPInputStream gis = new GZIPInputStream(bis);
-                ObjectInputStream ois = new ObjectInputStream(gis);
+                InputStream gis = compressed ? new GZIPInputStream(bis) : bis;
+                ObjectInputStream ois = new ObjectInputStream(gis)
         ) {
             LogHeader header = (LogHeader) ois.readObject();
 
@@ -244,7 +242,7 @@ public class Controller {
         }
     }
 
-    private void writeTestLog(File f, int numEvents) {
+    private void writeTestLog(File f, int numEvents, boolean compressed) {
         String[] names = {
                 "Test event",
                 "Auton debug",
@@ -268,7 +266,7 @@ public class Controller {
         try (
                 FileOutputStream fos = new FileOutputStream(f);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
-                GZIPOutputStream gos = new GZIPOutputStream(bos);
+                OutputStream gos = compressed ? new GZIPOutputStream(bos) : bos;
                 ObjectOutputStream oos = new ObjectOutputStream(gos)
         ) {
             LogHeader header = new LogHeader();
